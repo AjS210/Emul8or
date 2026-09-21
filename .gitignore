@@ -1,0 +1,60 @@
+# Build output
+build/
+.cxx/
+*.apk
+*.aab
+*.ap_
+*.dex
+*.class
+
+# Gradle
+.gradle/
+local.properties
+gradle-app.setting
+.gradletasknamecache
+
+# Android Studio / IntelliJ
+.idea/
+*.iml
+*.iws
+*.ipr
+captures/
+.navigation/
+
+# CMake / native
+cmake-build-*/
+CMakeCache.txt
+CMakeFiles/
+*.o
+*.so
+*.a
+
+# Keystores and secrets — never commit these
+*.jks
+*.keystore
+keystore.properties
+signing.properties
+
+# OS noise
+.DS_Store
+Thumbs.db
+*~
+*.swp
+
+# Logs and profiling
+*.log
+*.hprof
+
+# User-supplied content — must never be committed.
+# See docs/legal.md. Emul8or ships no ROMs, keys, BIOS, or system files.
+*.3ds
+*.cci
+*.cia
+*.cxi
+*.app
+*.romfs
+*.bin
+aes_keys.txt
+seeddb.bin
+boot9.bin
+boot11.bin
