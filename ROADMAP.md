@@ -35,11 +35,18 @@ Phases are ordered by dependency, not by excitement.
 **Goal:** produce a working, *unmodified* Azahar APK from source and run it on the S24 Ultra.
 **No Emul8or changes in this phase. None.**
 
-- [ ] Add Azahar as a git remote named `upstream` (see [docs/azahar-build-research.md](docs/azahar-build-research.md)).
-- [ ] Decide vendoring strategy — subtree/monorepo vs. submodule vs. full fork. Recommendation and
-      tradeoffs are documented in the research doc.
-- [ ] Pin a specific upstream tag as the baseline (candidate: `2126.1.2`, current stable) rather than
-      tracking `master`. A moving base makes rebases unpredictable.
+Full execution checklist: [docs/upstream-integration.md](docs/upstream-integration.md) §5.
+
+- [x] Add Azahar as a git remote named `upstream`, via `./scripts/setup-upstream.sh`.
+- [x] Pin the baseline to tag **`2126.1.2`** (`9e6f523`) rather than tracking `master`. A moving base
+      makes rebases unpredictable.
+- [x] Verify the pinned tag's build config matches the research (`minSdk 29`, NDK `27.3.13750724`,
+      compileSdk 35, targetSdk 37).
+- [x] Decide vendoring strategy — **merge upstream history, pinned to a tag**. Submodule rejected
+      because Azahar's Gradle project reaches up to the repo root for CMake. Reasoning in
+      [docs/upstream-integration.md](docs/upstream-integration.md) §4.
+- [x] Confirm Emul8or's `.gitignore` will not swallow upstream files on merge — checked, 0 collisions
+      across 2,327 files.
 - [ ] Install the toolchain per [docs/development-environment.md](docs/development-environment.md):
       JDK 17, Android SDK 35, NDK 27.3.13750724, CMake 3.30.3, Ninja, ccache.
 - [ ] `git submodule update --init --recursive` — Azahar has ~35 submodules; a shallow or partial

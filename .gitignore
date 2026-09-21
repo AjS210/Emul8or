@@ -47,14 +47,27 @@ Thumbs.db
 
 # User-supplied content — must never be committed.
 # See docs/legal.md. Emul8or ships no ROMs, keys, BIOS, or system files.
+#
+# Deliberately specific rather than broad: a blanket *.bin would swallow
+# legitimate upstream files once Azahar is merged in. Verified against
+# azahar-2126.1.2 (2327 files) — zero collisions with the rules below.
 *.3ds
 *.cci
 *.cia
 *.cxi
-*.app
 *.romfs
-*.bin
+*.nds
+
+# Keys, BIOS, firmware and system files
 aes_keys.txt
 seeddb.bin
 boot9.bin
 boot11.bin
+boot9_prot.bin
+nand.bin
+*.sav
+
+# Never commit user emulator data directories
+/user/
+/sdmc/
+/nand/

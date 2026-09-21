@@ -100,6 +100,17 @@ already exists upstream and we do not need to invent one.
 
 Full analysis: [docs/azahar-build-research.md](docs/azahar-build-research.md).
 
+Upstream is tracked as a git remote pinned to a tested release tag (currently **`2126.1.2`**). Set it
+up with:
+
+```bash
+./scripts/setup-upstream.sh
+```
+
+The integration plan — including the rule that unmodified Azahar must build and run on real hardware
+before any Emul8or code is written — is in
+[docs/upstream-integration.md](docs/upstream-integration.md).
+
 ---
 
 ## Legal
@@ -135,6 +146,7 @@ Sideloaded APK first. Google Play much later, if ever, and only if it is appropr
 | [docs/networking.md](docs/networking.md) | Discovery, handshake, transport, protocol, disconnect handling |
 | [docs/testing-devices.md](docs/testing-devices.md) | Test matrix, device profiles, ADB workflow, what to measure |
 | [docs/azahar-build-research.md](docs/azahar-build-research.md) | Upstream build system, minSdk analysis, integration seams |
+| [docs/upstream-integration.md](docs/upstream-integration.md) | Baseline pin, vendoring strategy, phase-1 build checklist |
 | [docs/development-environment.md](docs/development-environment.md) | Exact toolchain versions and setup |
 
 ---
