@@ -140,6 +140,7 @@ Sideloaded APK first. Google Play much later, if ever, and only if it is appropr
 
 | Document | What's in it |
 | --- | --- |
+| **[docs/getting-started-windows.md](docs/getting-started-windows.md)** | **Start here.** Beginner step-by-step: build the app on Windows and install it on your phone |
 | [ROADMAP.md](ROADMAP.md) | Phased delivery plan, from unmodified Azahar build to dual-phone play |
 | [docs/architecture.md](docs/architecture.md) | Roles, modules, video pipeline, state machine, layouts |
 | [docs/legal.md](docs/legal.md) | GPL compliance, asset prohibitions, trademark policy, contributor rules |

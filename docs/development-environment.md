@@ -2,6 +2,10 @@
 
 Everything needed to build Emul8or from source.
 
+> **New to this?** This page is a terse reference for people who already build Android projects.
+> If you want a walk-through that assumes no prior experience, read
+> **[getting-started-windows.md](getting-started-windows.md)** instead.
+
 The versions below are **not suggestions**. They are what upstream Azahar's build is pinned to, and
 mismatches produce failures that are slow and confusing to diagnose. Match them.
 
