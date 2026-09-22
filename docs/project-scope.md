@@ -89,7 +89,14 @@ A libretro core does not know or care about "screens". It calls `retro_video_ref
 buffer. For dual-screen consoles, the core renders **both screens stacked into that one buffer** —
 DS gives you 256×384 (two 256×192 screens), 3DS gives you the top and bottom composited together.
 
-**That means splitting top from bottom is a crop, performed in the frontend, in the app layer.**
+**That means splitting top from bottom is a crop, performed above the core, in the frontend stack.**
+
+> **Correction (source-verified).** This section originally said the crop would be *"in Kotlin"*.
+> That was wrong. Lemuroid renders through **LibretroDroid**, a separate GPL-3.0 C++/Kotlin library,
+> and the crop must be added there — its existing `viewport` API positions the quad but never writes
+> `textureCoordinates`, so it cannot sample a sub-region. The conclusion below is unaffected: it is
+> still one implementation covering every dual-screen core, with no per-emulator renderer surgery.
+> See **[lemuroid-crop-feasibility.md](lemuroid-crop-feasibility.md)** for the file-by-file detail.
 
 ### The consequence
 
