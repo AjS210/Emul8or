@@ -13,11 +13,12 @@ Phases are ordered by dependency, not by excitement.
 
 **Goal:** the repository is legible, legally sound, and describes what is being built.
 
-- [ ] **Validate the core assumption on stock Azahar** — confirm the existing secondary-display
-      feature can put the 3DS top screen on an external display while the bottom stays on the phone.
-      Runnable today on a Play Store install with no build required:
-      [docs/secondary-display-test.md](docs/secondary-display-test.md). This retires the project's
-      highest-risk unknown before any engineering effort is spent.
+- [x] **Validate the core assumption on stock Azahar** — **PASSED 2026-09-22.** Confirmed on the
+      S24 Ultra: top screen on the TV, bottom screen on the phone, both full-screen, layouts
+      independently configurable, controls overlaid on the bottom screen. Results and consequences:
+      [docs/secondary-display-test.md](docs/secondary-display-test.md). Two follow-on findings folded
+      into the design — the layout must be set on *both* ends (not just the secondary), and
+      `OPPOSITE` mode couples them so they cannot desynchronise.
 
 - [x] Repository created.
 - [x] GPL-2.0 `LICENSE` in place (inherited from Azahar).
@@ -95,6 +96,11 @@ Full execution checklist: [docs/upstream-integration.md](docs/upstream-integrati
   - [ ] Landscape A: top left, bottom right.
   - [ ] Landscape B: bottom left, top right.
 - [ ] Layout switching from the in-game menu, and automatic switching on device rotation.
+- [ ] **Two-sided layout coupling.** Hardware testing showed the primary and secondary layouts are
+      separate settings, and that configuring only the secondary leaves the top screen displayed
+      twice. Connecting a secondary must set the primary to `SINGLE_SCREEN` *and* the secondary to
+      `OPPOSITE`; disconnecting must restore a dual-screen layout. Treat it as one atomic transition,
+      never two independent toggles.
 - [ ] Virtual controls render as an **overlay above** the screens, never as a third panel. Verify on
       the S24 Ultra's tall aspect ratio.
 - [ ] Split minSdk by role — see phase 4.

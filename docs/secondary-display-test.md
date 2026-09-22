@@ -156,9 +156,83 @@ different approach to capturing the top screen, and it's enormously better to kn
 
 ---
 
-# Please record what happened
+# RESULT: ✅ PASS — confirmed 2026-09-22
 
-Fill this in and tell me — it directly determines the next engineering step.
+**Tested on the Samsung Galaxy S24 Ultra (SM-S928U1, Android 16) against a TV, using the Play Store
+build of Azahar.**
+
+| Question | Result |
+| --- | --- |
+| TV showed **only** the 3DS top screen | **Yes** |
+| Phone showed **only** the 3DS bottom screen | **Yes** — after also setting the phone's own layout |
+| Both screens full-screen, no bezels or borders | **Yes** |
+| On-screen controls overlaid on the bottom screen | **Yes** |
+| Phone and TV layouts independently configurable | **Yes** |
+
+**The core architectural assumption is validated.** Azahar renders the two 3DS screens to two
+independent displays, each with its own layout, on the exact target hardware. Emul8or's job is now to
+replace the display with a network stream — plumbing, not invention.
+
+## The important detail: two settings, not one
+
+Enabling the secondary display is **not** sufficient on its own. Two separate layouts must be set:
+
+| Screen | Setting | Value |
+| --- | --- | --- |
+| **TV** (secondary) | Settings → Layout → **Secondary Display Layout** | **Top Screen** |
+| **Phone** (primary) | Settings → Layout → **Screen Layout** | **Single Screen** (landscape) |
+
+Without the second one, the phone keeps drawing *both* 3DS screens while the TV shows the top screen
+— so the top screen appears twice and the bottom screen is small.
+
+This maps directly onto Emul8or's design, and confirms the two-sided layout switching described in
+[architecture.md](architecture.md) §7 is necessary. When a secondary device connects, Emul8or must
+change the layout on **both** ends, not just start streaming. When it disconnects, the primary must
+restore a dual-screen layout — which is exactly the pause-then-relayout behaviour already specified.
+
+### A shortcut worth knowing: "Opposite Screen"
+
+Reading the layout code afterwards (`framebuffer_layout.cpp`, `AndroidSecondaryLayout`), the
+secondary layout list has an **Opposite Screen** option that is the default. It renders
+`SingleFrameLayout(..., !swap_screen, ...)` — that is, **automatically whichever screen the phone is
+not showing.**
+
+So an equivalent and more robust configuration is:
+
+- Phone → **Single Screen**
+- TV → **Opposite Screen**
+
+Then the phone's "Swap Screens" button flips *both* displays in one action, keeping them
+complementary. Emul8or should prefer this coupling rather than pinning each side independently, since
+it cannot desynchronise into showing the same screen twice.
+
+## What this rules in
+
+- ✅ Two independent surfaces with independent layouts — real, shipping, working on the S24 Ultra.
+- ✅ Full-screen output with no forced bezels or letterboxing on either end.
+- ✅ Control overlay already composites over the bottom screen on the phone, satisfying the
+  "controls overlay, not a third panel" requirement in [architecture.md](architecture.md) §7 for
+  free.
+- ✅ The primary's appearance in dual-device mode is exactly what Emul8or's Primary mode should look
+  like. That UI is inherited, not built.
+
+## What is still unproven
+
+This test used a **real display** (HDMI/cast). It does **not** yet prove the remaining question,
+which stays the project's highest risk:
+
+> Will `NativeLibrary.secondarySurfaceChanged()` accept a **`MediaCodec` encoder input surface**
+> in place of a display surface?
+
+That is [architecture.md](architecture.md) §10 question 1, and it is still the first thing to
+prototype in phase 6. What this test *does* establish is that everything upstream of that surface —
+dual rendering, independent layouts, full-screen output — already works. The unknown is now narrowed
+to a single API handoff rather than the whole mechanism.
+
+---
+
+<details>
+<summary>Original blank results template</summary>
 
 ```
 Date:
@@ -174,6 +248,8 @@ If wireless — roughly how laggy? (none / slight / bad / unplayable)
 
 Anything unexpected:
 ```
+
+</details>
 
 ---
 

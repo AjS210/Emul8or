@@ -98,6 +98,12 @@ physical external displays (HDMI/DeX/Presentation API). Emul8or's core insight i
 over Wi-Fi can be made to look like one more secondary surface**, which means the integration seam
 already exists upstream and we do not need to invent one.
 
+**This has been verified on the target hardware.** On 2026-09-22, stock Azahar on the S24 Ultra was
+confirmed rendering the 3DS top screen to a TV while the bottom screen stayed on the phone — both
+full-screen, each with its own independently configurable layout, controls overlaid on the bottom
+screen. Details and design consequences:
+[docs/secondary-display-test.md](docs/secondary-display-test.md).
+
 Full analysis: [docs/azahar-build-research.md](docs/azahar-build-research.md).
 
 Upstream is tracked as a git remote pinned to a tested release tag (currently **`2126.1.2`**). Set it
@@ -140,7 +146,7 @@ Sideloaded APK first. Google Play much later, if ever, and only if it is appropr
 
 | Document | What's in it |
 | --- | --- |
-| **[docs/secondary-display-test.md](docs/secondary-display-test.md)** | **Do this first.** A 10-minute test on stock Azahar that validates the project's core assumption. No building required |
+| [docs/secondary-display-test.md](docs/secondary-display-test.md) | ✅ **Core assumption validated on hardware** — top screen on TV, bottom on phone, confirmed 2026-09-22 |
 | **[docs/getting-started-windows.md](docs/getting-started-windows.md)** | **Then start here.** Beginner step-by-step: build the app on Windows and install it on your phone |
 | [ROADMAP.md](ROADMAP.md) | Phased delivery plan, from unmodified Azahar build to dual-phone play |
 | [docs/architecture.md](docs/architecture.md) | Roles, modules, video pipeline, state machine, layouts |

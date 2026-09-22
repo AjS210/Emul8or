@@ -206,6 +206,30 @@ happened.
 - **Primary:** bottom screen only, filling the display, with the control overlay above it.
 - **Secondary:** top screen only, letterboxed to preserve the 5:3 aspect ratio.
 
+**Both ends must be set, and they must be coupled.** Confirmed by hardware test
+([secondary-display-test.md](secondary-display-test.md)): enabling the secondary display alone is not
+enough. Upstream requires two independent settings —
+
+| End | Upstream setting | Value |
+| --- | --- | --- |
+| Primary (phone) | `ScreenLayout` | `SINGLE_SCREEN` |
+| Secondary (TV / phone) | `SecondaryDisplayLayout` | `TOP_SCREEN`, or better, `OPPOSITE` |
+
+If only the secondary is configured, the primary keeps drawing *both* 3DS screens and the top screen
+appears twice.
+
+Prefer **`OPPOSITE`** (`SecondaryDisplayLayout::OppositeScreenOnly`, upstream's default) for the
+secondary. `AndroidSecondaryLayout()` implements it as
+`SingleFrameLayout(..., !swap_screen, ...)` — automatically whichever screen the primary is *not*
+showing. Because the two are derived from a single `swap_screen` value, they cannot desynchronise
+into showing the same screen twice, and the existing "Swap Screens" action flips both ends
+atomically. Pinning each side independently reintroduces a failure state upstream has already
+designed out.
+
+**Implication for connect/disconnect:** attaching a secondary device is a *two-sided layout
+transition*, not merely "start streaming". The same is true in reverse — see §6, where the primary
+pauses and then restores a dual-screen layout.
+
 ### Local fallback layouts
 
 Used when no secondary is connected. Three required layouts:
@@ -235,6 +259,11 @@ They never occupy a reserved band that shrinks the game view.
 
 Azahar's `overlay/InputOverlay.kt` already works this way. Preserve that behaviour and resist any
 layout approach that reserves space for controls.
+
+**Confirmed on hardware, 2026-09-22.** With the secondary display active, the S24 Ultra draws the
+bottom screen full-screen — no bezels, no borders — with the controls composited on top of it. This
+is already exactly the Primary-mode appearance Emul8or specifies, so the requirement is inherited
+rather than implemented. The work is to avoid regressing it.
 
 ---
 
@@ -286,13 +315,15 @@ stuttering emulator is not.
 
 Unresolved, to be answered by prototyping:
 
-0. **Does the secondary-display feature work at all on the target hardware?** Testable *today* on a
-   stock Play Store Azahar install, with no build required — see
-   [secondary-display-test.md](secondary-display-test.md). Notably, upstream describes the feature as
-   supporting a secondary screen "wired or wireless (Chromecast, Miracast)", which means Azahar
-   already tolerates a second display with network latency in the path. Encouraging for §4.
+0. ~~**Does the secondary-display feature work at all on the target hardware?**~~ **ANSWERED — yes.**
+   Verified 2026-09-22 on the S24 Ultra with a TV, using a stock Play Store Azahar build. Top screen
+   on the TV, bottom screen on the phone, both full-screen, both layouts independently configurable,
+   controls overlaid on the bottom screen. Full result:
+   [secondary-display-test.md](secondary-display-test.md).
 1. Does `NativeLibrary.secondarySurfaceChanged()` accept a `MediaCodec` input surface without
-   modification? **Highest-risk unknown in the project.** Test first.
+   modification? **Now the highest-risk unknown in the project**, and narrowed usefully by question 0
+   — everything upstream of that surface is confirmed working, so the remaining risk is a single API
+   handoff rather than the whole mechanism. Test first in phase 6.
 2. Does the secondary `EmuWindow_Android` render at the encoder's requested resolution, or at the
    emulator's internal scale? Determines whether a scaling stage is needed.
 3. Can the Note 8's decoder sustain 60 fps at 400×240 with acceptable latency? Likely yes; measure.
