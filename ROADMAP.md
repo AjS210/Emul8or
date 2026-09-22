@@ -13,6 +13,12 @@ Phases are ordered by dependency, not by excitement.
 
 **Goal:** the repository is legible, legally sound, and describes what is being built.
 
+- [ ] **Validate the core assumption on stock Azahar** — confirm the existing secondary-display
+      feature can put the 3DS top screen on an external display while the bottom stays on the phone.
+      Runnable today on a Play Store install with no build required:
+      [docs/secondary-display-test.md](docs/secondary-display-test.md). This retires the project's
+      highest-risk unknown before any engineering effort is spent.
+
 - [x] Repository created.
 - [x] GPL-2.0 `LICENSE` in place (inherited from Azahar).
 - [x] `README.md` — project overview and the two modes.

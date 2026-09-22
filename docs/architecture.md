@@ -286,6 +286,11 @@ stuttering emulator is not.
 
 Unresolved, to be answered by prototyping:
 
+0. **Does the secondary-display feature work at all on the target hardware?** Testable *today* on a
+   stock Play Store Azahar install, with no build required — see
+   [secondary-display-test.md](secondary-display-test.md). Notably, upstream describes the feature as
+   supporting a secondary screen "wired or wireless (Chromecast, Miracast)", which means Azahar
+   already tolerates a second display with network latency in the path. Encouraging for §4.
 1. Does `NativeLibrary.secondarySurfaceChanged()` accept a `MediaCodec` input surface without
    modification? **Highest-risk unknown in the project.** Test first.
 2. Does the secondary `EmuWindow_Android` render at the encoder's requested resolution, or at the

@@ -424,18 +424,15 @@ Once unmodified Azahar builds and runs, you have a working foundation. Then:
 
 Full plan in [ROADMAP.md](../ROADMAP.md).
 
-### One bonus test, if you can
+### Do this before you build anything
 
-If you have a **USB-C-to-HDMI adapter** and a monitor or TV, try this while you're still on
-unmodified Azahar:
+There's a ten-minute test you can run on a **stock Play Store Azahar** — no building, no coding —
+that confirms whether the project's core assumption holds.
 
-1. Connect the S24 Ultra to the screen
-2. In Azahar's settings, find the **secondary display** option and enable it
-3. Set the secondary layout to show the **top screen**
+If the 3DS top screen can appear on a TV while the bottom screen stays on your phone, **that is
+Emul8or's entire core feature already working**, just over a cable or Chromecast instead of Wi-Fi.
 
-If the 3DS top screen appears on the TV while the bottom screen stays on the phone — **that is
-Emul8or's entire core feature already working**, just over a cable instead of Wi-Fi. Emul8or's plan
-is to feed that same mechanism a network connection instead of an HDMI port.
+Full instructions: **[secondary-display-test.md](secondary-display-test.md)**
 
-Confirming this works on your actual phone, before we write any code, removes the single biggest
-risk in the project. See [architecture.md](architecture.md) §4.
+Run it first. It removes the single biggest risk in the project before you spend an afternoon on
+build tools.
