@@ -156,6 +156,12 @@ Sideloaded APK first. Google Play much later, if ever, and only if it is appropr
 The project is in its planning phase. The most useful contributions right now are review of the
 architecture and networking designs.
 
-Note that upstream Azahar has a strict [AI use
-policy](https://github.com/azahar-emu/azahar/blob/master/AI-POLICY.md). Any Emul8or change intended
-to be upstreamed to Azahar must comply with it. See [docs/legal.md](docs/legal.md).
+**AI-assisted contributions are welcome, with disclosure and human review.** A human must own the
+change and be able to answer questions about it; the licensing and content rules in
+[docs/legal.md](docs/legal.md) apply in full either way.
+
+Note that upstream Azahar has a much stricter [AI use
+policy](https://github.com/azahar-emu/azahar/blob/master/AI-POLICY.md) for their own repository.
+That is a contribution rule for Azahar, not a licence restriction — it does not limit Emul8or's GPL
+rights to use, modify, and distribute their code. It does mean Emul8or generally will not upstream
+patches. Reasoning in [docs/legal.md](docs/legal.md).

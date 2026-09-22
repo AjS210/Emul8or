@@ -159,24 +159,67 @@ By contributing you confirm:
 
 ### AI-assisted contributions
 
+**Emul8or's policy: AI assistance is permitted anywhere in this repository, provided it is disclosed
+and a human has reviewed it.**
+
+Requirements:
+
+- **Disclose it** in the pull request description. Say what was AI-assisted and to what extent.
+- **A human reviews and owns it.** The contributor is accountable for correctness, licensing, and
+  behaviour. "The model wrote it" is not a defence for a bug or a licence violation.
+- **The rules in §7 above still apply in full.** No incompatibly-licensed code, no decompiled or
+  leaked Nintendo material, no prohibited content. An AI-generated contribution that launders
+  copyrighted code is exactly as unacceptable as a hand-copied one — and harder to spot, so
+  reviewers should be correspondingly sceptical of large unexplained contributions.
+- **No autonomously-filed PRs or issues.** A human opens it, and a human answers questions about it.
+
+#### Why this differs from Azahar's policy
+
 Upstream Azahar maintains a strict [AI use
-policy](https://github.com/azahar-emu/azahar/blob/master/AI-POLICY.md). Because Emul8or intends to
-track upstream and contribute changes back, **any patch destined for Azahar must comply with
-Azahar's policy**, which in summary:
+policy](https://github.com/azahar-emu/azahar/blob/master/AI-POLICY.md), which permits AI only for
+diagnosis and for very small disclosed snippets, and prohibits AI-written contributions of
+substantial size.
 
-- Permits AI for understanding and diagnosing code, provided a human independently verifies.
-- Permits very small AI-written snippets (roughly five lines or fewer) **with disclosure**.
-- Prohibits undisclosed AI-written code, AI-written contributions of substantial size, and using AI
-  to launder incompatibly-licensed code.
-- Prohibits autonomously-submitted pull requests and issues.
+**That policy is a contribution rule for their repository. It is not a licence term, and it does not
+restrict Emul8or.** GPL-2.0 §6 is explicit:
 
-For Emul8or-only code the project applies the same standard, with one relaxation: AI assistance is
-acceptable for **documentation, comments, and tests** provided it is disclosed in the PR description
-and a human has reviewed it for accuracy. Any contribution touching emulator internals — anything
-plausibly upstreamable — follows Azahar's rules exactly.
+> You may not impose any further restrictions on the recipients' exercise of the rights granted
+> herein.
 
-The reason is practical. A patch we cannot upstream because of its provenance is a patch we maintain
-forever.
+Azahar cannot attach conditions to the GPL grant beyond the GPL itself. Emul8or's rights to use,
+modify, fork, build, and publicly distribute Azahar's code are unconditional, subject only to the
+ordinary GPL obligations in §2 of this document: stay GPL-2.0-or-later, ship the corresponding
+source, preserve copyright notices, state changes.
+
+#### The tradeoff we are accepting
+
+Adopting a policy looser than Azahar's means **Emul8or cannot expect to upstream patches to Azahar.**
+
+This costs less than it sounds. Emul8or's anticipated patch surface against upstream is roughly four
+files — `minSdk`, the manifest, the launcher entry point, and the secondary-surface hook (see
+[upstream-integration.md](upstream-integration.md) §6). Everything that makes Emul8or distinctive —
+the networking layer, the H.264 streaming pipeline, role selection, the connection state machine —
+is new code in Emul8or's own tree. Azahar would not merge that regardless of how it was written,
+because two-phone Wi-Fi streaming is a different product, not a missing Azahar feature.
+
+Should a genuinely general-purpose, upstreamable fix emerge — for example, making the secondary
+surface API accept an arbitrary `Surface` — it can be written by hand specifically for submission,
+and disclosed under Azahar's rules. That decision is made per patch, not as a standing constraint on
+the whole project.
+
+#### A note on perception
+
+Emulation communities care about provenance, and a fork built on another project's work invites
+scrutiny. That is a reasonable thing for them to care about. The mitigations are transparency about
+how the code was produced, a human who genuinely understands and can defend the emulator-internals
+changes, and not asking upstream maintainers to debug code nobody on our side understands.
+
+This is a reputational consideration, not a legal one, and it is managed by conduct rather than by
+policy.
+
+**Disclosure for the current repository state:** the initial documentation set — `README.md`,
+`ROADMAP.md`, and the files in `docs/` — was AI-drafted from research against the upstream Azahar
+repository, and is under human review.
 
 ---
 
