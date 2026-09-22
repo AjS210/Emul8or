@@ -380,10 +380,9 @@ Every upstream file Emul8or modifies is a future merge conflict. Rules:
 1. New code goes in `emul8or/`, never inside `org.citra.citra_emu` packages.
 2. Upstream modifications should be the minimum hook needed — ideally a single call into Emul8or code.
 3. Document every upstream touch point in a table in this file, with the reason.
-4. Keep hooks small enough that **carrying them forever is cheap**. Emul8or does not plan to upstream
-   patches, because its AI policy is looser than Azahar's — see [legal.md](legal.md). A
-   genuinely general-purpose fix can still be hand-written for submission as a one-off decision, but
-   the default assumption is that every upstream edit is ours to maintain across rebases.
+4. Keep hooks small enough that **carrying them forever is cheap**. Emul8or is downstream-only and
+   does not contribute to the Azahar repository at all ([legal.md](legal.md)). There is no
+   hand-off: every upstream edit is ours to maintain across every rebase, permanently.
 
 Expected touch points, kept deliberately short:
 

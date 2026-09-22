@@ -160,8 +160,18 @@ architecture and networking designs.
 change and be able to answer questions about it; the licensing and content rules in
 [docs/legal.md](docs/legal.md) apply in full either way.
 
-Note that upstream Azahar has a much stricter [AI use
-policy](https://github.com/azahar-emu/azahar/blob/master/AI-POLICY.md) for their own repository.
-That is a contribution rule for Azahar, not a licence restriction — it does not limit Emul8or's GPL
-rights to use, modify, and distribute their code. It does mean Emul8or generally will not upstream
-patches. Reasoning in [docs/legal.md](docs/legal.md).
+### Relationship to Azahar
+
+Upstream Azahar has a much stricter [AI use
+policy](https://github.com/azahar-emu/azahar/blob/master/AI-POLICY.md) for their own repository. That
+is a contribution rule for Azahar, not a licence restriction — it does not limit Emul8or's GPL rights
+to use, modify, and distribute their code.
+
+Because our policy is incompatible with theirs, **Emul8or is a downstream-only fork. We do not open
+pull requests, file issues, or request support on the Azahar repository.** Their project, their
+rules; the GPL gives us the code, not their maintainers' time. Please do not report Emul8or bugs to
+Azahar. If you hit something that reproduces on a stock Azahar build, report it there yourself, in
+your own words — not on Emul8or's behalf.
+
+We credit Azahar and Citra prominently and gratefully. Full reasoning in
+[docs/legal.md](docs/legal.md).

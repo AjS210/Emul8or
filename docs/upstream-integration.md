@@ -242,17 +242,20 @@ Every upstream file Emul8or touches is a future merge conflict. The discipline:
 1. **New code lives in `emul8or/`.** Never inside `org.citra.citra_emu` packages.
 2. **Upstream edits are hooks, not logic.** Ideally one call out to Emul8or code.
 3. **Every touch point is recorded** in the table below, with a reason.
-4. **Assume every hook is ours to carry.** Emul8or does not plan to upstream patches — its AI policy
-   is deliberately looser than Azahar's, which rules out routine contribution ([legal.md](legal.md)).
-   This raises the value of rules 1–3: a patch that is never handed off is a patch that must survive
-   every future rebase, so keep it minimal. Hand-writing a general-purpose fix for submission stays
-   available as a per-patch decision.
+4. **Every hook is ours to carry, permanently.** Emul8or is downstream-only and does not contribute
+   to the Azahar repository ([legal.md](legal.md)). Nothing is ever handed off, so every upstream
+   edit must survive every future rebase indefinitely. This is what makes rules 1–3 load-bearing
+   rather than stylistic: patch surface is a permanent tax, so pay as little of it as possible.
 
 ### Upstream touch point register
 
 Maintained as changes land. Empty until phase 2.
 
-| File | Change | Reason | Upstreamable? |
+Every row here is a permanent maintenance cost — Emul8or is downstream-only, so none of these are
+ever handed off ([legal.md](legal.md)). "Rebase risk" estimates how likely the change is to conflict
+when adopting a newer upstream tag.
+
+| File | Change | Reason | Rebase risk |
 | --- | --- | --- | --- |
 | *(none yet)* | | | |
 

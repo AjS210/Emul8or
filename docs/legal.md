@@ -121,8 +121,10 @@ Source files adapted from upstream keep their original headers. Emul8or's new fi
 // Refer to the LICENSE file included.
 ```
 
-This matches upstream's header convention, which keeps Azahar's `license-header` CI check happy and
-makes upstreaming a patch less work.
+This matches upstream's header convention. Emul8or does not contribute upstream, but keeping the
+format consistent means Azahar's `license-header` CI script continues to pass on our tree, and it
+keeps the provenance of each file legible — upstream files keep their Citra/Azahar headers, ours
+carry Emul8or's.
 
 ---
 
@@ -191,21 +193,45 @@ modify, fork, build, and publicly distribute Azahar's code are unconditional, su
 ordinary GPL obligations in §2 of this document: stay GPL-2.0-or-later, ship the corresponding
 source, preserve copyright notices, state changes.
 
-#### The tradeoff we are accepting
+#### The tradeoff we accept: Emul8or does not contribute upstream
 
-Adopting a policy looser than Azahar's means **Emul8or cannot expect to upstream patches to Azahar.**
+**Emul8or is a downstream-only fork. We do not submit patches, pull requests, issues, or bug reports
+to the Azahar repository.** This is a standing project rule, not a per-patch judgement call.
 
-This costs less than it sounds. Emul8or's anticipated patch surface against upstream is roughly four
+The reason is that Emul8or's AI policy is incompatible with Azahar's, and their repository is theirs
+to govern. Submitting work that does not meet their stated standard — or submitting it while hoping
+the provenance question does not come up — would disrespect a boundary they have set explicitly and
+in writing. The GPL entitles us to *take* the code. It does not entitle us to their maintainers'
+review time, and it certainly does not entitle us to spend that time on contributions they have said
+in advance they do not want.
+
+So the rule is simple and absolute:
+
+| Action | Allowed? |
+| --- | --- |
+| Use, modify, fork, build, distribute Azahar's GPL code | **Yes** — unconditional under the GPL |
+| Read their source, issues, and discussions | **Yes** — public, and essential to the work |
+| Credit Azahar and Citra prominently | **Yes** — required, see §5 |
+| Open PRs against `azahar-emu/azahar` | **No** |
+| Open issues or bug reports against their repo | **No** |
+| Ask their maintainers for support with Emul8or | **No** |
+| Imply any affiliation, endorsement, or shared maintenance | **No** |
+
+If an Emul8or user finds a bug that is genuinely upstream's and not ours, the correct response is to
+reproduce it on a stock Azahar build and let **the user** report it in their own words, from their
+own account. We do not route our problems into their tracker by proxy.
+
+**The practical cost is low.** Emul8or's anticipated patch surface against upstream is roughly four
 files — `minSdk`, the manifest, the launcher entry point, and the secondary-surface hook (see
 [upstream-integration.md](upstream-integration.md) §6). Everything that makes Emul8or distinctive —
-the networking layer, the H.264 streaming pipeline, role selection, the connection state machine —
-is new code in Emul8or's own tree. Azahar would not merge that regardless of how it was written,
-because two-phone Wi-Fi streaming is a different product, not a missing Azahar feature.
+the networking layer, the H.264 streaming pipeline, role selection, the connection state machine — is
+new code in Emul8or's own tree. Azahar would not merge that under any policy, because two-phone Wi-Fi
+streaming is a different product rather than a missing Azahar feature.
 
-Should a genuinely general-purpose, upstreamable fix emerge — for example, making the secondary
-surface API accept an arbitrary `Surface` — it can be written by hand specifically for submission,
-and disclosed under Azahar's rules. That decision is made per patch, not as a standing constraint on
-the whole project.
+**The real cost is maintenance**, and it is worth naming. Every hook we place in upstream code is
+ours to carry across every future rebase, permanently. Nothing gets handed off. That makes keeping
+the patch surface minimal a hard engineering constraint rather than a stylistic preference — see
+[upstream-integration.md](upstream-integration.md) §6.
 
 #### A note on perception
 
