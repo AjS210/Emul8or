@@ -225,8 +225,19 @@ own account. We do not route our problems into their tracker by proxy.
 files — `minSdk`, the manifest, the launcher entry point, and the secondary-surface hook (see
 [upstream-integration.md](upstream-integration.md) §6). Everything that makes Emul8or distinctive —
 the networking layer, the H.264 streaming pipeline, role selection, the connection state machine — is
-new code in Emul8or's own tree. Azahar would not merge that under any policy, because two-phone Wi-Fi
-streaming is a different product rather than a missing Azahar feature.
+new code in Emul8or's own tree.
+
+> **Correction.** An earlier version of this document claimed Azahar "would not merge that under any
+> policy, because two-phone Wi-Fi streaming is a different product rather than a missing Azahar
+> feature." **That was an unsupported inference and is retracted.** In fact
+> [PR #2343](https://github.com/azahar-emu/azahar/pull/2343) implements phone-to-phone screen
+> streaming against Azahar and is open, and the related "Android external display support" issue was
+> closed as *completed*. No maintainer has expressed any view either way — the PR has sat unreviewed.
+> See [prior-art-pr2343.md](prior-art-pr2343.md).
+>
+> The downstream-only rule stands regardless, because it rests on the AI-policy incompatibility above
+> and on respecting a boundary Azahar has stated in writing — not on any guess about which features
+> they would welcome.
 
 **The real cost is maintenance**, and it is worth naming. Every hook we place in upstream code is
 ours to carry across every future rebase, permanently. Nothing gets handed off. That makes keeping

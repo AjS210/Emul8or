@@ -121,10 +121,24 @@ a physical display's:
 the GPU — no readback to CPU memory, which is the difference between a viable latency budget and an
 unusable one.
 
-**This must be validated early in phase 6.** The assumption to test: that the native side accepts an
-encoder input surface as readily as a display surface, and that EGL/Vulkan context creation against
-it succeeds. If it does not, the fallback is a `SurfaceTexture` intermediary or a readback path —
-both worse, so find out early.
+**This is no longer an assumption — it has been demonstrated.**
+[Azahar PR #2343](https://github.com/azahar-emu/azahar/pull/2343) hands a `MediaCodec` encoder input
+Surface directly to `secondarySurfaceChanged()` and streams the result between two Android phones,
+tested end-to-end on real hardware. The native side accepts it, EGL/Vulkan context creation succeeds,
+and no renderer changes are required.
+
+Two hazards on this path are known in advance thanks to that work, and Emul8or must handle both:
+
+1. **`SecondaryDisplay` will steal the Surface back.** Its hidden `VirtualDisplay` placeholder's
+   `DisplayListener` callbacks fire asynchronously and recreate the Presentation over the encoder's
+   Surface; `destroySurface()` can even fire *after* the Presentation was released, since Android does
+   not guarantee `dismiss()` is synchronous. A suppression flag must guard `updateSurface()`,
+   `destroySurface()`, and `updateDisplay()` while streaming owns the secondary window.
+2. **Touch coordinates break on small secondary surfaces** — `UpdateCurrentFramebufferLayout()`
+   clamps to the *primary* layout's minimum size, inflating the values passed to
+   `AndroidSecondaryLayout()`.
+
+Details and attribution: [prior-art-pr2343.md](prior-art-pr2343.md).
 
 ---
 
@@ -334,10 +348,13 @@ Unresolved, to be answered by prototyping:
    on the TV, bottom screen on the phone, both full-screen, both layouts independently configurable,
    controls overlaid on the bottom screen. Full result:
    [secondary-display-test.md](secondary-display-test.md).
-1. Does `NativeLibrary.secondarySurfaceChanged()` accept a `MediaCodec` input surface without
-   modification? **Now the highest-risk unknown in the project**, and narrowed usefully by question 0
-   — everything upstream of that surface is confirmed working, so the remaining risk is a single API
-   handoff rather than the whole mechanism. Test first in phase 6.
+1. ~~Does `NativeLibrary.secondarySurfaceChanged()` accept a `MediaCodec` input surface without
+   modification?~~ **ANSWERED — yes.** [Azahar PR #2343](https://github.com/azahar-emu/azahar/pull/2343)
+   does exactly this and is tested on real hardware, handing the encoder's input Surface straight to
+   `secondarySurfaceChanged()` "so the GPU renders straight into it with no CPU readback." The
+   zero-copy path this architecture depends on is demonstrated, not hypothetical. It also surfaces two
+   bugs on that same path that Emul8or must carry fixes for — see
+   [prior-art-pr2343.md](prior-art-pr2343.md).
 2. Does the secondary `EmuWindow_Android` render at the encoder's requested resolution, or at the
    emulator's internal scale? Determines whether a scaling stage is needed.
 3. Can the Note 8's decoder sustain 60 fps at 400×240 with acceptable latency? Likely yes; measure.

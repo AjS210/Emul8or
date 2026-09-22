@@ -157,6 +157,7 @@ Sideloaded APK first. Google Play much later, if ever, and only if it is appropr
 | [docs/upstream-integration.md](docs/upstream-integration.md) | Baseline pin, vendoring strategy, phase-1 build checklist |
 | [docs/feature-auto-hide-overlay.md](docs/feature-auto-hide-overlay.md) | Spec: hide touch controls automatically when a gamepad connects |
 | [docs/feature-touch-gestures.md](docs/feature-touch-gestures.md) | Spec: 3-finger tap to toggle the overlay, and other multi-touch gestures |
+| [docs/prior-art-pr2343.md](docs/prior-art-pr2343.md) | Existing phone-to-phone streaming PR against Azahar — proves the core mechanism, hands us two bug fixes |
 | [docs/development-environment.md](docs/development-environment.md) | Exact toolchain versions and setup |
 
 ---

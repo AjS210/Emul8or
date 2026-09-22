@@ -160,6 +160,11 @@ contradicts the one-APK goal and should be a last resort.
 
 **Goal:** the actual product.
 
+- [ ] **Read [Azahar PR #2343](https://github.com/azahar-emu/azahar/pull/2343) first** — 322 lines of
+      working `NetworkStreamer.kt` doing phone-to-phone streaming off the same surface hook, tested on
+      real hardware. It proves the zero-copy encoder-surface path works and hands us two bug fixes on
+      that exact path. Carry both fixes. Credit required (GPL-2.0).
+      See [docs/prior-art-pr2343.md](docs/prior-art-pr2343.md).
 - [ ] Tap the top-screen framebuffer on Primary. Preferred path: render the top screen to a
       dedicated surface via Azahar's existing secondary-surface mechanism, so we reuse upstream
       plumbing instead of forking the renderer.
