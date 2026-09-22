@@ -2,18 +2,25 @@
 
 **Two phones. Two screens. One handheld.**
 
-Emul8or is an open-source Android application that turns a pair of Android phones into a
-dual-screen Nintendo 3DS-style handheld. One phone runs the emulation and shows the bottom
-touchscreen; a second phone, over Wi-Fi, becomes the top screen.
+Emul8or is an open-source Android application that turns your phone into an R36S-style handheld —
+**every retro handheld system in one app**, instead of five separate emulators to play one series.
 
-A single APK ships both roles. You pick the role when you launch the app.
+And when you want it, a **second phone becomes the top screen**: two phones, one dual-screen
+console. A single APK ships both roles, picked at launch.
 
-> **Status: pre-alpha / evaluation phase.** No emulator code has landed yet. An existing
-> proof-of-concept ([Azahar PR #2343](https://github.com/azahar-emu/azahar/pull/2343) plus a companion
-> viewer app) already demonstrates phone-to-phone 3DS streaming. **Before building anything, that
-> should be tried** — see [docs/try-existing-solution-first.md](docs/try-existing-solution-first.md).
-> If it turns out to be good enough, this project is unnecessary and that is a good outcome. See
-> [ROADMAP.md](ROADMAP.md) for the plan if it is not.
+> **Status: pre-alpha / scope revision.** No code has landed yet. The scope was widened on
+> 2026-09-22 from "3DS dual-screen app" to "all-in-one handheld emulator with dual-screen
+> support" — see **[docs/project-scope.md](docs/project-scope.md)** for what that changed and why
+> it makes the hard part easier.
+>
+> **Two evaluation steps come before any code.** (1) An existing proof-of-concept
+> ([Azahar PR #2343](https://github.com/azahar-emu/azahar/pull/2343) plus a companion viewer)
+> already demonstrates phone-to-phone 3DS streaming — try it first, see
+> [docs/try-existing-solution-first.md](docs/try-existing-solution-first.md). (2)
+> [Lemuroid](https://github.com/Swordfish90/Lemuroid) already covers 25 systems including all seven
+> Pokémon generations — install it and confirm the library premise holds. If the existing tools turn
+> out to be good enough, this project is unnecessary and that is a good outcome. See
+> [ROADMAP.md](ROADMAP.md) for the plan if they are not.
 
 ---
 
@@ -149,7 +156,8 @@ Sideloaded APK first. Google Play much later, if ever, and only if it is appropr
 
 | Document | What's in it |
 | --- | --- |
-| **[docs/try-existing-solution-first.md](docs/try-existing-solution-first.md)** | **Do this first.** A 20-minute test of the existing proof-of-concept. It may make this project unnecessary |
+| **[docs/project-scope.md](docs/project-scope.md)** | **Read this first.** What the project is now: all-in-one handheld emulator, dual-screen as the differentiator. Why forking Lemuroid beats forking Azahar |
+| **[docs/try-existing-solution-first.md](docs/try-existing-solution-first.md)** | **Do this second.** A 20-minute test of the existing proof-of-concept. It may make this project unnecessary |
 | [docs/secondary-display-test.md](docs/secondary-display-test.md) | ✅ **Core assumption validated on hardware** — top screen on TV, bottom on phone, confirmed 2026-09-22 |
 | **[docs/getting-started-windows.md](docs/getting-started-windows.md)** | **Then start here.** Beginner step-by-step: build the app on Windows and install it on your phone |
 | [ROADMAP.md](ROADMAP.md) | Phased delivery plan, from unmodified Azahar build to dual-phone play |
