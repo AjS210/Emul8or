@@ -158,6 +158,7 @@ Sideloaded APK first. Google Play much later, if ever, and only if it is appropr
 | --- | --- |
 | **[docs/project-scope.md](docs/project-scope.md)** | **Read this first.** What the project is now: all-in-one handheld emulator, dual-screen as the differentiator. Why forking Lemuroid beats forking Azahar |
 | **[docs/lemuroid-crop-feasibility.md](docs/lemuroid-crop-feasibility.md)** | **Where the code goes.** Source-verified: the screen split belongs in LibretroDroid, ~5 files, one row per system after that |
+| [docs/why-prs-stall.md](docs/why-prs-stall.md) | Why three separate prior-art PRs died. Not latency, not licensing — maintainer throughput. Evidence for planning downstream-only |
 | **[docs/try-existing-solution-first.md](docs/try-existing-solution-first.md)** | **Do this second.** A 20-minute test of the existing proof-of-concept. It may make this project unnecessary |
 | [docs/secondary-display-test.md](docs/secondary-display-test.md) | ✅ **Core assumption validated on hardware** — top screen on TV, bottom on phone, confirmed 2026-09-22 |
 | **[docs/getting-started-windows.md](docs/getting-started-windows.md)** | **Then start here.** Beginner step-by-step: build the app on Windows and install it on your phone |
