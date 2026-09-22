@@ -98,6 +98,32 @@ Emul8or's arrangement, not Ufoex's inverted one.
 
 Single-developer, zero-star, two months stale — but real, installable, and correctly licensed.
 
+### What DualMelon actually plays: DS and DSi only — never 3DS
+
+Worth stating explicitly, because the naming invites confusion.
+
+DualMelon is a fork of melonDS-android, which is a port of melonDS, whose own README describes it as
+*"a DS and DSi emulator"*. The upstream repo's topics are literally `nds`, `dsi`, `emulator`. There
+is no 3DS support anywhere in that lineage, and there never will be.
+
+| Console | Azahar | DualMelon / melonDS |
+| --- | --- | --- |
+| Nintendo DS (`.nds`) | No | **Yes** |
+| Nintendo DSi (`.dsi`, DSiWare) | No | **Yes** |
+| Nintendo 3DS (`.3ds`, `.cia`) | **Yes** | **No** |
+
+This is not a missing feature someone could add — it is a different machine. The DS runs an ARM9 +
+ARM7 pair; the 3DS runs an ARM11 + ARM9 with an entirely different GPU (PICA200), OS, filesystem and
+encryption scheme. A DS emulator is not a partial 3DS emulator. Writing 3DS support into melonDS
+would mean writing a new emulator that happens to live in the same repository.
+
+(The real 3DS plays DS cartridges via backward-compatible hardware. Emulators inherit none of that —
+Azahar cannot run `.nds` files, and melonDS cannot run `.3ds` files.)
+
+**Practical consequence:** the two projects are complements, not alternatives. Covering both DS and
+3DS on two phones means two separate apps built on two separate cores under two different licences.
+There is no single-core path to both.
+
 ### DraStic (DS, closed-source, now free)
 
 Has had **external display support for years** — `Options → Video → External display screen = Top
@@ -163,6 +189,7 @@ That is a far better basis for deciding what to build than any amount of further
 
 | Question | Answer |
 | --- | --- |
+| Does DualMelon play 3DS games? | **No.** DS and DSi only. melonDS has no 3DS support and never will — different machine entirely |
 | Can Azahar's dual-screen code be reused for DS? | **No.** It is thin Android API glue plus Azahar-specific classes. Nothing meaningful transplants |
 | Is it legally possible? | Azahar GPL-2.0-or-later → melonDS GPL-3.0 is allowed. The reverse is not |
 | Does DS already have dual-screen? | **Yes.** melonDS-android 2.0.0 for dual-screen handhelds |
