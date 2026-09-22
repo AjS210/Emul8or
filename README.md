@@ -8,9 +8,12 @@ touchscreen; a second phone, over Wi-Fi, becomes the top screen.
 
 A single APK ships both roles. You pick the role when you launch the app.
 
-> **Status: pre-alpha / documentation phase.** No emulator code has landed yet. This repository
-> currently contains the design, research, and planning documents for the project. See
-> [ROADMAP.md](ROADMAP.md) for what is being built and in what order.
+> **Status: pre-alpha / evaluation phase.** No emulator code has landed yet. An existing
+> proof-of-concept ([Azahar PR #2343](https://github.com/azahar-emu/azahar/pull/2343) plus a companion
+> viewer app) already demonstrates phone-to-phone 3DS streaming. **Before building anything, that
+> should be tried** — see [docs/try-existing-solution-first.md](docs/try-existing-solution-first.md).
+> If it turns out to be good enough, this project is unnecessary and that is a good outcome. See
+> [ROADMAP.md](ROADMAP.md) for the plan if it is not.
 
 ---
 
@@ -146,6 +149,7 @@ Sideloaded APK first. Google Play much later, if ever, and only if it is appropr
 
 | Document | What's in it |
 | --- | --- |
+| **[docs/try-existing-solution-first.md](docs/try-existing-solution-first.md)** | **Do this first.** A 20-minute test of the existing proof-of-concept. It may make this project unnecessary |
 | [docs/secondary-display-test.md](docs/secondary-display-test.md) | ✅ **Core assumption validated on hardware** — top screen on TV, bottom on phone, confirmed 2026-09-22 |
 | **[docs/getting-started-windows.md](docs/getting-started-windows.md)** | **Then start here.** Beginner step-by-step: build the app on Windows and install it on your phone |
 | [ROADMAP.md](ROADMAP.md) | Phased delivery plan, from unmodified Azahar build to dual-phone play |
