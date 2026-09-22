@@ -265,6 +265,13 @@ bottom screen full-screen — no bezels, no borders — with the controls compos
 is already exactly the Primary-mode appearance Emul8or specifies, so the requirement is inherited
 rather than implemented. The work is to avoid regressing it.
 
+**Overlay visibility is manual-only upstream.** Azahar gates the overlay on a single persisted
+boolean (`EmulationMenuSettings.showOverlay`) toggled by hand from the in-game menu, and registers no
+`InputDeviceListener` anywhere — so it cannot detect a controller connecting. Emul8or adds automatic
+hide-on-connect / show-on-disconnect: [feature-auto-hide-overlay.md](feature-auto-hide-overlay.md).
+The runtime state must be layered *over* the user's saved preference rather than overwriting it,
+otherwise connecting a controller once silently disables the overlay forever.
+
 ---
 
 ## 8. Threading

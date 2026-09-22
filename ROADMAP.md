@@ -210,7 +210,11 @@ pipeline simultaneously is a bad idea.
 ## Phase 10 — Controls and distribution
 
 - [ ] Bluetooth controller support on Primary.
-- [ ] Controller-aware layout: hide the on-screen overlay when a physical controller is connected.
+- [ ] **Auto-hide the touch overlay when a controller connects, and restore it on disconnect.**
+      Confirmed absent from upstream — Azahar has only a manual "Show Controller Overlay" toggle and
+      registers no `InputDeviceListener` at all, so it cannot react to a controller appearing.
+      Modelled on Lemuroid. Full spec, including the rule that auto-hide must not overwrite the
+      user's persisted preference: [docs/feature-auto-hide-overlay.md](docs/feature-auto-hide-overlay.md).
 - [ ] Customisable overlay: position, size, opacity.
 - [ ] Signed release APKs on GitHub Releases, with checksums.
 - [ ] Consider Obtainium support for update-tracking, as Azahar does.
