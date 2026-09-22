@@ -213,6 +213,20 @@ while auto-hide works fine.
 
 ---
 
+## Companion feature
+
+[feature-touch-gestures.md](feature-touch-gestures.md) specifies a **3-finger tap** to toggle the
+overlay manually. The two are complementary and should be built with each other in mind:
+
+- **Auto-hide** covers the controller case with no user action at all.
+- **The gesture** covers every other case — and replaces the current buried menu toggle as the
+  fast manual path.
+
+Note the interaction: a 3-finger tap while a controller is connected counts as the *manual override*
+described above, and should suspend auto-hide for the session rather than fighting it.
+
+---
+
 ## Where this sits
 
 Roadmap **phase 10**, alongside Bluetooth controller support. It is not a dependency for the

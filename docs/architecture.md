@@ -272,6 +272,13 @@ hide-on-connect / show-on-disconnect: [feature-auto-hide-overlay.md](feature-aut
 The runtime state must be layered *over* the user's saved preference rather than overwriting it,
 otherwise connecting a controller once silently disables the overlay forever.
 
+**Multi-touch gestures are free real estate.** The emulated 3DS touchscreen is single-touch — the
+core exposes it as one coordinate pair (`TouchPressed(x, y)`), and the JNI boundary likewise
+(`onTouchEvent(x, y, pressed)`). A gesture using three or more fingers therefore cannot correspond to
+any possible game input, so there is no ambiguity to resolve. Emul8or uses a 3-finger tap to toggle
+the overlay: [feature-touch-gestures.md](feature-touch-gestures.md). Gestures are Primary-mode only;
+Secondary handles no input at all.
+
 ---
 
 ## 8. Threading

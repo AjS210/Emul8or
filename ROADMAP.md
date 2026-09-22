@@ -101,6 +101,11 @@ Full execution checklist: [docs/upstream-integration.md](docs/upstream-integrati
       twice. Connecting a secondary must set the primary to `SINGLE_SCREEN` *and* the secondary to
       `OPPOSITE`; disconnecting must restore a dual-screen layout. Treat it as one atomic transition,
       never two independent toggles.
+- [ ] **3-finger tap to toggle the control overlay.** Safe by construction — the emulated 3DS
+      touchscreen is single-touch, so a 3-finger gesture cannot collide with any game input. Must
+      intercept at `dispatchTouchEvent` and release any in-progress touch on recognition, or the game
+      is left with a stuck touch-down. Spec:
+      [docs/feature-touch-gestures.md](docs/feature-touch-gestures.md).
 - [ ] Virtual controls render as an **overlay above** the screens, never as a third panel. Verify on
       the S24 Ultra's tall aspect ratio.
 - [ ] Split minSdk by role — see phase 4.
@@ -216,6 +221,8 @@ pipeline simultaneously is a bad idea.
       Modelled on Lemuroid. Full spec, including the rule that auto-hide must not overwrite the
       user's persisted preference: [docs/feature-auto-hide-overlay.md](docs/feature-auto-hide-overlay.md).
 - [ ] Customisable overlay: position, size, opacity.
+- [ ] Optional extra gestures — 3-finger swipe for the in-game menu or screen swap, 4-finger tap to
+      pause. All default **off**. See [docs/feature-touch-gestures.md](docs/feature-touch-gestures.md).
 - [ ] Signed release APKs on GitHub Releases, with checksums.
 - [ ] Consider Obtainium support for update-tracking, as Azahar does.
 - [ ] Google Play: evaluate much later. Play imposes storage-access restrictions that pushed Azahar
